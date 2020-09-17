@@ -34,8 +34,8 @@ def update(req, id):
         task = models.Catatan.objects.filter(pk=id).update(
             tgl_kegiatan=req.POST['tgl_kegiatan'], 
             judul=req.POST['judul'], 
-            ket=req.POST['ket'], 
-            upload_img=req.POST['upload_img'])
+            ket=req.POST['ket'],
+            gambar=req.POST['gambar'])
         return redirect('/catatan/')
 
     task = models.Catatan.objects.filter(pk=id).first()
