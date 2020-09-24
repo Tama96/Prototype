@@ -32,7 +32,9 @@
                                   <td>{{d.judul}}</td>
                                   <td>{{d.ket}}</td>
                                   <td>
-                                    <a href="/media/{{d.gambar}}">File</a>
+                                    {% for gambar in d.catatan.all %}
+                                    <a href="{{gambar}}">File</a>
+                                    {% endfor %}
                                   </td>
                                   <td>
                                       <a class="btn btn-sm btn-success" href="/catatan/{{d.id}}">Detail</a>
