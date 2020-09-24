@@ -1,10 +1,14 @@
 from django.shortcuts import render, redirect
 from . import models, forms
-
+# tasks : mengambil catatan berdasarkan user yang login
+# jika user adalah staff maka ambil semua catatan 
 def index(req):
-    tasks = models.Catatan.objects.all()
+    tasks = models.Catatan.objects.filter(owner=req.user)
+    group = req.user.groups.first()
+    if group is not None and group.name == 'staf':
+        tasks = models.Catatan.objects.all()
     return render(req, 'catatan/index.html',{
-        'data': tasks,
+        'data': tasks,  
     })
     
 def new(req, *args, **kwargs):
@@ -13,11 +17,12 @@ def new(req, *args, **kwargs):
     if req.method == 'POST':
         form_catatan = forms.CatatanForm(req.POST)
         if form_catatan.is_valid():
+            form_catatan.instance.owner=req.user
             form_catatan.save()
         images = []
-        files = req.FILES.getlist('gambar')
+        files = req.FILES.getlist('upload_img')
         for file in files:
-            images.append(models.Gambar.objects.create(gambar=file,catatan=form_catatan.instance))
+            images.append(models.Gambar.objects.create(upload_img=file,catatan=form_catatan.instance))
         return redirect('/catatan/')
     return render(req, 'catatan/new.html',{
         'form_catatan' : form_catatan,
@@ -34,16 +39,16 @@ def delete(req, id):
     models.Catatan.objects.filter(pk=id).delete()
     return redirect('/catatan/')
 
-def update(req, id):
-    if req.POST:
-        task = models.Catatan.objects.filter(pk=id).update(
-            tgl_kegiatan=req.POST['tgl_kegiatan'], 
-            judul=req.POST['judul'], 
-            ket=req.POST['ket'],
-            gambar=req.POST['gambar'])
-        return redirect('/catatan/')
+# def update(req, id):
+#     if req.POST:
+#         task = models.Catatan.objects.filter(pk=id).update(
+#             tgl_kegiatan=req.POST['tgl_kegiatan'], 
+#             judul=req.POST['judul'], 
+#             ket=req.POST['ket'], 
+#             upload_img=req.POST['upload_img'])
+#         return redirect('/catatan/')
 
-    task = models.Catatan.objects.filter(pk=id).first()
-    return render(req, 'catatan/update.html', {
-        'data': task,
-    })
+#     task = models.Catatan.objects.filter(pk=id).first()
+#     return render(req, 'catatan/update.html', {
+#         'data': task,
+#     })

@@ -25,12 +25,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts',
-    'catatan',
-    'home',
-    'mitra',
-    'mahasiswa',
     'crispy_forms',
+    'bootstrap_datepicker_plus',
+    'accounts',
+    'home',
+    'staf',
+    'mahasiswa',
+    'catatan',
+    'mitra',
+    
 ]
 
 MIDDLEWARE = [
@@ -48,7 +51,9 @@ ROOT_URLCONF = 'SIM_PKL.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR + '/templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,7 +75,7 @@ WSGI_APPLICATION = 'SIM_PKL.wsgi.application'
 DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'simpkl',
+        'NAME': 'simpklbaru',
         'USER': 'tama',
         'PASSWORD': 'tama',
         'HOST': 'localhost',
@@ -123,3 +128,7 @@ STATICFILES_DIRS =[
 ]
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media') 
 MEDIA_URL = '/media/'
+
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}

@@ -1,8 +1,16 @@
-# from django.forms import ModelForm
+from django.forms import ModelForm
+from bootstrap_datepicker_plus import DatePickerInput
 
-# from . import models
+from mitra.models import Mitra
 
-# class PklForm(ModelForm):
-#     class Meta:
-#         model = models.Pkl
-#         fields = ['judul']
+from . import models
+
+class PklForm(ModelForm):
+
+    class Meta:
+        model = models.Pkl
+        exclude = ['owner']
+        widgets = {
+            'tanggal_mulai': DatePickerInput(),
+            'tanggal_selesai': DatePickerInput(),
+        }

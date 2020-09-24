@@ -5,12 +5,12 @@ from . import models
 class CatatanForm(ModelForm):
     class Meta :
         model = models.Catatan
-        fields = '__all__'
-
+        exclude=['owner']
+       
 class GambarForm(ModelForm):
     class Meta :
         model = models.Gambar
-        fields = ['gambar']
+        fields = ['upload_img']
         widgets = {
-            'gambar': ClearableFileInput(attrs={'multiple': True}),
+            'upload_img': ClearableFileInput(attrs={'multiple': True}),
         }
