@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'mahasiswa',
     'catatan',
     'mitra',
+    'countable_field',
 ]
 
 MIDDLEWARE = [
@@ -75,8 +76,8 @@ DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'simpkl',
-        'USER': 'giko99',
-        'PASSWORD': 'gikoriyo382',
+        'USER': 'tama',
+        'PASSWORD': 'tama',
         'HOST': 'localhost',
         'PORT': '',
     }
