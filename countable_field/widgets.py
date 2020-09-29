@@ -10,7 +10,7 @@ class CountableWidget(widgets.Textarea):
             'all':
                 ('countable_field/css/styles.css',)
         }
-
+        
     def render(self, name, value, attrs=None, **kwargs):
         # the build_attrs signature changed in django version 1.11
         if VERSION[:2] >= (1, 11):
@@ -30,6 +30,7 @@ class CountableWidget(widgets.Textarea):
         else:
             output = super(CountableWidget, self).render(name, value, final_attrs)
         output += self.get_word_count_template(final_attrs)
+        print (output)
         return mark_safe(output)
 
     @staticmethod
@@ -41,11 +42,11 @@ class CountableWidget(widgets.Textarea):
         if count_direction == 'down':
             count_label = "Words remaining: "
             if count_type == "characters":
-                count_label = "Characters remaining: "
+                count_label = "Sisa Karakter: "
             elif count_type == "paragraphs":
-                count_label = "Paragraphs remaining: "
+                count_label = "Sisa Paragraf: "
             elif count_type == "sentences":
-                count_label = "Sentences remaining: "
+                count_label = "Sisa Kalimat: "
         else:
             count_label = "Word count: "
             if count_type == "characters":
@@ -60,3 +61,5 @@ class CountableWidget(widgets.Textarea):
                ) % {'label': count_label,
                     'id': attrs.get('id'),
                     'number': max_count if count_direction == 'down' else '0'}
+
+

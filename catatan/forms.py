@@ -9,10 +9,9 @@ class CatatanForm(ModelForm):
         model = models.Catatan
         exclude=['owner']
         widgets = {
-            'judul': CountableWidget(attrs={'data-min-count': 10,'data-max-count': 200}),         
-            'ket': CountableWidget(attrs={'data-min-count': 100,'data-max-count': 200}),                                            
+            'ket': CountableWidget(attrs={'data-count': 'characters','data-max-count': 500, 'data-count-direction': 'down'}),                                            
         }
-       
+    
 class GambarForm(ModelForm):
     class Meta :
         model = models.Gambar
