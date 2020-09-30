@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
+from django.core.files import File
+from django.conf import settings
 from mitra.models import Mitra
 
 
@@ -12,11 +14,16 @@ class Pkl(models.Model):
     tanggal_mulai = models.DateField(default=datetime.now)
     tanggal_selesai = models.DateField()
     approve = models.BooleanField(default=False)
+    #reject = models.BooleanField(default=False)
+    #catatan = models.TextField(max_length=1500, help_text="maksimal 1500 karakter")
 
     def tanggal_selesai_format(self):
         return self.tanggal_selesai.strftime('%Y-%m=%d')
     def tanggal_selesai_format(self):
         return self.tanggal_selesai.strftime('%Y-%m=%d')
 
+class Catatan(models.Model):
+    catatan = models.TextField(max_length=1500, help_text="maksimal 1500 karakter")
+    reject = models.BooleanField(default=False)
 
 

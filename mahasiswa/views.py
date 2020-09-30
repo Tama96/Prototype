@@ -136,6 +136,11 @@ def approve(req, id):
     a = models.Pkl.objects.filter(pk=id).update(approve=True)
     return redirect('/mahasiswas')
 
-def approve_batal(req, id):
-    a = models.Pkl.objects.filter(pk=id).update(approve=False)
-    return redirect('/mahasiswas')
+#def approve_batal(req, id):
+    #a = models.Pkl.objects.filter(pk=id).update(approve=False)
+    #return redirect('/mahasiswas')
+
+def reject(req,id):
+    if req.POST:
+        a = models.Pkl.objects.filter(pk=id).update(catatan=req.POST['catatan'])
+        return redirect('/mahasiswas')

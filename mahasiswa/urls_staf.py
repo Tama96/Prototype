@@ -11,5 +11,6 @@ urlpatterns = [
     path('<id>/delete/', views.delete_staf),
     path('<id>/update/', views.update_staf),
     path('<id>/approve/', views.approve),
-    path('<id>/approve-batal/', views.approve_batal),
+    #path('<id>/approve-batal/', views.approve_batal),
+    path('<id>/reject/',views.reject),
 ]

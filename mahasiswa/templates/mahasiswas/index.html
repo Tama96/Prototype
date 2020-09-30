@@ -1,5 +1,5 @@
 {% extends "base_staf.html" %}
-
+{% load static %}
 {% block content %}
 <div id="layoutSidenav_content">
   <main>
@@ -42,10 +42,9 @@
               <td>
                 <!-- <a type="button" class="btn btn-success" href="/mahasiswas/{{d.id}}">Detail</a> -->
                 {% if d.approve == True %}
-                <a type="button" class="btn btn-warning" href="/mahasiswas/{{d.id}}/approve-batal"><i class="fas fa-minus-circle"></i></a>
-                {% else %}
-                <a type="button" class="btn btn-primary" href="/mahasiswas/{{d.id}}/approve"><i class="fas fa-check"></i></a>
+                <a type="button" class="btn btn-warning" href="/mahasiswas/{{d.id}}/reject"><i class="fas fa-minus-circle"></i></a>
                 {% endif %}
+                <a type="button" class="btn btn-primary" href="/mahasiswas/{{d.id}}/approve"><i class="fas fa-check"></i></a>
                 <a type="button" class="btn btn-danger" href="/mahasiswas/{{d.id}}/delete"><i class="fas fa-trash-alt"></i></a>
               </td>
             </tr>
@@ -57,4 +56,8 @@
     </div>
   </main>
 </div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'countable_field/js/scripts.js' %}"></script>
 {% endblock %}
