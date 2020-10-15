@@ -37,9 +37,9 @@
               <td>
                 {% if d.approve == True %}
                 <span class="text-success">Approved</span>
-                {% elif d.approve == False and d.reject == False %}
+                {% elif d.approve == False and d.reject == True %}
                 <span class="text-danger">Reject</span>
-                {% elif d.reject == True and d.approve == False %}
+                {% elif d.reject == False and d.approve == False %}
                 <span class="text-warning">Process</span>
                 {% endif %}
               </td>
@@ -143,7 +143,7 @@
                       Judul Proposal : {{d.judul}}
                     </div>
                     <div class="">
-                      Catatan : {{d.form_reject}}
+                      Catatan : {{d.catatan}}
                     </div>
                     <div class="">
                       Nama Mitra : {{d.nama_mitra}}

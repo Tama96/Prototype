@@ -84,11 +84,9 @@ def input_staf(req):
 
 
 def detail(req, id):
-    pkl = models.Pkl.objects.filter(pk=id).first()
-    form_reject = forms.RejectForm()
+    pkl = models.Pkl.objects.filter(pk=id).first()    
     return render(req, 'mahasiswa/detail.html', {
         'data': pkl,
-        'form_reject': form_reject,
     })
 
 def detail_staf(req, id):
@@ -141,13 +139,12 @@ def approve(req, id):
     return redirect('/mahasiswas')
 
 def reject(req,id):
-    models.Pkl.objects.filter(pk=id).update(approve=False)
     form_reject = forms.RejectForm(req.POST)
     if req.POST:
         form_reject = forms.RejectForm(req.POST)
         if form_reject.is_valid():
-            form_reject.instance.pkl = models.Pkl.objects.filter(pk=id).first()
-            form_reject.save()
+            models.Pkl.objects.filter(pk=id).update(approve=False, reject=True, catatan=form_reject.cleaned_data['catatan'])
+
     return redirect('/mahasiswas')
 
 # def rejection(req, id):
