@@ -11,7 +11,7 @@ class CatatanForm(ModelForm):
         widgets = {
             'ket': CountableWidget(attrs={'data-count': 'characters','data-max-count': 500, 'data-count-direction': 'down'}),                                            
         }
-
+    
 class GambarForm(ModelForm):
     class Meta :
         model = models.Gambar

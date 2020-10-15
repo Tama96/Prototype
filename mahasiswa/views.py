@@ -32,7 +32,7 @@ def index_staf(req):
     tasks = models.Pkl.objects.filter(owner=req.user)
     form_input = forms.PklForm()
     form_reject = forms.RejectForm()
-    
+
     if req.POST:
         form_input = forms.PklForm(req.POST, req.FILES)
         if form_input.is_valid():
@@ -46,6 +46,7 @@ def index_staf(req):
     return render(req, 'mahasiswas/index.html',{
         'data': tasks,  
         'form_reject': form_reject,
+        
     })
 
 
@@ -137,23 +138,15 @@ def approve(req, id):
     a = models.Pkl.objects.filter(pk=id).update(approve=True)
     return redirect('/mahasiswas')
 
-#def approve_batal(req, id):
-    #a = models.Pkl.objects.filter(pk=id).update(approve=False)
-    #return redirect('/mahasiswas')
-
 def reject(req,id):
-    tasks_approved = models.Reject.objects.filter(pk=id).update(reject=False)
+    form_reject = forms.RejectForm(req.POST)
     if req.POST:
         form_reject = forms.RejectForm(req.POST)
         if form_reject.is_valid():
-            form_reject.save()
-        #a = models.Pkl.objects.filter(pk=id).update(catatan=req.POST['catatan'])
-            return redirect('/mahasiswas')
-        #a = models.Reject.objects.filter(pk=id).first(reject=False)
-        return render(req, 'mahasiswas/index.html', {
-        'form_reject' : form_reject,
-        'data': a,
-    })
+            models.Pkl.objects.filter(pk=id).update(approve=False, reject=True, catatan=form_reject.cleaned_data['catatan'])
 
-    #a = models.Pkl.objects.filter(pk=id).update(approve=False)
-    #return redirect('/mahasiswas')
+    return redirect('/mahasiswas')
+
+# def rejection(req, id):
+    # tasks_reject = models.Reject.objects.filter(pk=id).update(reject=True)
+

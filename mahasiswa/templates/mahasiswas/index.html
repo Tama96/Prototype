@@ -35,7 +35,9 @@
               <td>
                 {% if d.approve == True %}
                 <span class="text-success">Approved</span>
-                {% else %}
+                {% elif d.approve == False and d.reject == True %}
+                <span class="text-danger">Reject</span>
+                {% elif d.reject == False and d.approve == False %}
                 <span class="text-warning">Process</span>
                 {% endif %}
               </td>
@@ -69,11 +71,11 @@
                       {{ form_reject|crispy }}
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-warning">
+                        <button type="submit" href=/mahasiswas/{{d.id}}/reject/ class="btn btn-warning">
                           <i class="fas fa-minus-circle"></i>
                         </button>
                       </div>
-
+</form>
                   </div>
                 </div>
               </div>

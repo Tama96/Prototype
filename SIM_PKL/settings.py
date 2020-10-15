@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'mitra',
     'countable_field',
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -75,7 +74,7 @@ WSGI_APPLICATION = 'SIM_PKL.wsgi.application'
 DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'simpkl',
+        'NAME': 'simpklpercobaan',
         'USER': 'tama',
         'PASSWORD': 'tama',
         'HOST': 'localhost',
