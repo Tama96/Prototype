@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.core.files import File
 from django.conf import settings
 import PIL.Image
+import os
 
 class Catatan(models.Model):
     owner = models.ForeignKey(User, on_delete = models.DO_NOTHING,related_name='catatan')
@@ -17,7 +18,7 @@ class Gambar(models.Model):
 
     def save(self,force_insert=False, force_update=False, using=None,*args, **kwargs):
         super(Gambar, self).save(*args, **kwargs)
-        if self.upload_img:
+        if self.upload_img and os.path.splitext(self.upload_img.name)[1] in ['.jpg', '.jpeg', '.png']:
             upload_img = self.upload_img
             if upload_img.size > 0.3*1024*1024: #jika lebih dari 300kb maka akan otomatis terkompress
                 self.compress_image(upload_img)
